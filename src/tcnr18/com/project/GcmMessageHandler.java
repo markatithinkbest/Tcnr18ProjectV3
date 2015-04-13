@@ -35,15 +35,12 @@ public class GcmMessageHandler extends IntentService {
 		Bundle extras = intent.getExtras();
 
 		GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
-		// The getMessageType() intent parameter must be the intent you received
-		// in your BroadcastReceiver.
 		String messageType = gcm.getMessageType(intent);
 		mes = extras.getString("message");
 
 		showToast();
-		// Log.i(LOG_TAG, "Received : (" + messageType + ")  " +
-		// extras.getString("message"));
-
+		notifyGcm();
+	
 		GcmBroadcastReceiver.completeWakefulIntent(intent);
 
 	}
@@ -69,10 +66,9 @@ public class GcmMessageHandler extends IntentService {
 		// your application to the Home screen.
 		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
 		// Adds the back stack for the Intent (but not the Intent itself)
-		//stackBuilder.addParentStack(ToGooglePlayActivity.class);
+		// stackBuilder.addParentStack(ToGooglePlayActivity.class);
 		stackBuilder.addParentStack(MainActivity.class);
-		
-		
+
 		// Adds the Intent that starts the Activity to the top of the stack
 		stackBuilder.addNextIntent(resultIntent);
 		PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,
@@ -87,10 +83,8 @@ public class GcmMessageHandler extends IntentService {
 	public void showToast() {
 		handler.post(new Runnable() {
 			public void run() {
-				// Toast.makeText(getApplicationContext(), mes,
-				// Toast.LENGTH_LONG).show();
-				notifyGcm();
-
+				Toast.makeText(getApplicationContext(), mes, Toast.LENGTH_LONG)
+						.show();
 			}
 		});
 
