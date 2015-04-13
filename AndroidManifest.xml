@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="tcnr18.com.project"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="18"
+        android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <permission
+        android:name="tcnr18.com.project.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="tcnr18.com.proejct.permission.C2D_MESSAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name" >
+        <activity
+            android:name=".NavigationDrawerActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <!--
+                  <activity
+                    android:name=".NavigationDrawerActivity"
+                    android:label="@string/app_name"
+                    android:screenOrientation="portrait" >
+                </activity>
+  
+           <activity
+               android:name=".NavigationDrawerActivity"
+               android:label="@string/app_name"
+               android:screenOrientation="portrait" >
+              <intent-filter>
+                   <action android:name="android.intent.action.MAIN" />
+
+                   <category android:name="android.intent.category.LAUNCHER" />
+               </intent-filter>
+           </activity>
+        -->
+        <provider
+            android:name=".TaipeiOkProvider"
+            android:authorities="tcnr18.com.project.TaipeiOkProvider"
+            android:exported="false"
+            android:syncable="true" />
+
+        <service android:name=".UpdateService" />
+
+        <activity
+            android:name=".ToGooglePlayActivity"
+            android:label="@string/title_activity_result" >
+        </activity>
+        <activity
+            android:name=".ToGcmActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".ToAppWebpageActivity"
+            android:label="@string/title_activity_result" >
+        </activity>
+ 
+
+        <receiver
+            android:name=".GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <category android:name="tcnr18.com.project" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".GcmMessageHandler" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="7095000" />
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
